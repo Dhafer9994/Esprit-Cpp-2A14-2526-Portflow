@@ -1,0 +1,11 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/style">
+        <file>livraison.css</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>images/logo.png</file>
+        <file>images/dashboard_bg.gif</file>
+        <file>images/login.png</file>
+    </qresource>
+</RCC>
