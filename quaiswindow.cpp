@@ -3389,7 +3389,8 @@ void QuaisWindow::onEditQuai(int row)
     QWidget* container = new QWidget(dlg);
     container->setGeometry(0, 0, 600, 600);
     container->setGraphicsEffect(shadow);
-    container->setStyleSheet("QWidget { background: white; border-radius: 24px; }");
+    container->setStyleSheet(qApp->property("isDarkMode").toBool() ? "QWidget { background: #1E293B; border-radius: 24px; }"
+                                                                   : "QWidget { background: white; border-radius: 24px; }");
 
     QVBoxLayout* mainLay = new QVBoxLayout(container);
     mainLay->setContentsMargins(0, 0, 0, 0);
@@ -3435,47 +3436,72 @@ void QuaisWindow::onEditQuai(int row)
                               bool isEmpty, bool isValid,
                               const QString& idle, const QString& err, const QString& ok)
     {
+        bool dark = qApp->property("isDarkMode").toBool();
         if (isEmpty) {
-            f->setStyleSheet(R"(
+            f->setStyleSheet(dark ? R"(
+                QLineEdit { background: #2D3748; border: 1.5px solid #4A5568;
+                            border-radius: 10px; padding: 4px 14px; color: #F1F5F9;
+                            font-family: 'Segoe UI'; font-size: 11pt; }
+                QLineEdit:focus { border: 1.5px solid #3B82F6; background: #374151; }
+            )" : R"(
                 QLineEdit { background: #F9FAFB; border: 1.5px solid #E5E7EB;
                             border-radius: 10px; padding: 4px 14px; color: #1f2937;
                             font-family: 'Segoe UI'; font-size: 11pt; }
                 QLineEdit:focus { border: 1.5px solid #378ADD; background: white; }
             )");
             h->setText("  " + idle);
-            h->setStyleSheet("color: #9ca3af; background: transparent; margin-top: -3px; margin-bottom: 4px;");
+            h->setStyleSheet(dark ? "color: #94A3B8; background: transparent; margin-top: -3px; margin-bottom: 4px;"
+                                  : "color: #9ca3af; background: transparent; margin-top: -3px; margin-bottom: 4px;");
         } else if (isValid) {
-            f->setStyleSheet(R"(
+            f->setStyleSheet(dark ? R"(
+                QLineEdit { background: #2D3748; border: 1.5px solid #1D9E75;
+                            border-radius: 10px; padding: 4px 14px; color: #F1F5F9;
+                            font-family: 'Segoe UI'; font-size: 11pt; }
+                QLineEdit:focus { border: 1.5px solid #1D9E75; background: #374151; }
+            )" : R"(
                 QLineEdit { background: white; border: 1.5px solid #1D9E75;
                             border-radius: 10px; padding: 4px 14px; color: #1f2937;
                             font-family: 'Segoe UI'; font-size: 11pt; }
                 QLineEdit:focus { border: 1.5px solid #1D9E75; background: white; }
             )");
             h->setText("✓  " + ok);
-            h->setStyleSheet("color: #0F6E56; background: transparent; margin-top: -3px; margin-bottom: 4px;");
+            h->setStyleSheet(dark ? "color: #22C55E; background: transparent; margin-top: -3px; margin-bottom: 4px;"
+                                  : "color: #0F6E56; background: transparent; margin-top: -3px; margin-bottom: 4px;");
         } else {
-            f->setStyleSheet(R"(
+            f->setStyleSheet(dark ? R"(
+                QLineEdit { background: #7F1D1D; border: 1.5px solid #E24B4A;
+                            border-radius: 10px; padding: 4px 14px; color: #F1F5F9;
+                            font-family: 'Segoe UI'; font-size: 11pt; }
+                QLineEdit:focus { border: 1.5px solid #E24B4A; background: #7F1D1D; }
+            )" : R"(
                 QLineEdit { background: #FEF2F2; border: 1.5px solid #E24B4A;
                             border-radius: 10px; padding: 4px 14px; color: #1f2937;
                             font-family: 'Segoe UI'; font-size: 11pt; }
                 QLineEdit:focus { border: 1.5px solid #E24B4A; background: #FEF2F2; }
             )");
             h->setText("✕  " + err);
-            h->setStyleSheet("color: #A32D2D; background: transparent; margin-top: -3px; margin-bottom: 4px;");
+            h->setStyleSheet(dark ? "color: #EF4444; background: transparent; margin-top: -3px; margin-bottom: 4px;"
+                                  : "color: #A32D2D; background: transparent; margin-top: -3px; margin-bottom: 4px;");
         }
     };
 
     auto makeField = [&](const QString& label, const QString& value,
                          QLabel*& hintLbl, const QString& idleHint) -> QLineEdit*
     {
+        bool dark = qApp->property("isDarkMode").toBool();
         QLabel* lbl = new QLabel(label);
         lbl->setFont(QFont("Segoe UI", 8, QFont::Medium));
-        lbl->setStyleSheet("color: #6b7280; background: transparent; letter-spacing: 0.5px;");
+        lbl->setStyleSheet(dark ? "color: #CBD5E1; background: transparent; letter-spacing: 0.5px;"
+                                : "color: #6b7280; background: transparent; letter-spacing: 0.5px;");
 
         QLineEdit* field = new QLineEdit(value);
         field->setFont(QFont("Segoe UI", 11));
         field->setFixedHeight(44);
-        field->setStyleSheet(R"(
+        field->setStyleSheet(dark ? R"(
+            QLineEdit { background: #2D3748; border: 1.5px solid #4A5568;
+                        border-radius: 10px; padding: 4px 14px; color: #F1F5F9; }
+            QLineEdit:focus { border: 1.5px solid #3B82F6; background: #374151; }
+        )" : R"(
             QLineEdit { background: #F9FAFB; border: 1.5px solid #E5E7EB;
                         border-radius: 10px; padding: 4px 14px; color: #1f2937; }
             QLineEdit:focus { border: 1.5px solid #378ADD; background: white; }
@@ -3485,7 +3511,8 @@ void QuaisWindow::onEditQuai(int row)
 
         hintLbl = new QLabel("  " + idleHint);
         hintLbl->setFont(QFont("Segoe UI", 8));
-        hintLbl->setStyleSheet("color: #9ca3af; background: transparent; margin-top: -3px; margin-bottom: 4px;");
+        hintLbl->setStyleSheet(dark ? "color: #94A3B8; background: transparent; margin-top: -3px; margin-bottom: 4px;"
+                                    : "color: #9ca3af; background: transparent; margin-top: -3px; margin-bottom: 4px;");
         formLay->addWidget(hintLbl);
 
         return field;
@@ -3521,7 +3548,8 @@ void QuaisWindow::onEditQuai(int row)
 
     QLabel* statutLbl = new QLabel("Statut");
     statutLbl->setFont(QFont("Segoe UI", 10, QFont::Medium));
-    statutLbl->setStyleSheet("color: #374151; background: transparent;");
+    statutLbl->setStyleSheet(qApp->property("isDarkMode").toBool() ? "color: #CBD5E1; background: transparent;"
+                                                                   : "color: #374151; background: transparent;");
     formLay->addWidget(statutLbl);
 
     QComboBox* statutCombo = new QComboBox();
@@ -3531,7 +3559,15 @@ void QuaisWindow::onEditQuai(int row)
     statutCombo->setFixedHeight(44);
     statutCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     statutCombo->setMinimumContentsLength(12);
-    statutCombo->setStyleSheet(R"(
+    statutCombo->setStyleSheet(qApp->property("isDarkMode").toBool() ? R"(
+        QComboBox { background: #2D3748; border: 1.5px solid #4A5568; border-radius: 10px;
+                    padding: 4px 14px; color: #F1F5F9; font-family: 'Segoe UI'; font-size: 11pt; }
+        QComboBox:focus { border: 1.5px solid #3B82F6; background: #374151; }
+        QComboBox::drop-down { border: none; width: 36px; }
+        QComboBox QAbstractItemView { background: #2D3748; border: 1px solid #4A5568;
+            border-radius: 10px; selection-background-color: #3B82F6;
+            selection-color: white; padding: 6px; min-width: 180px; }
+    )" : R"(
         QComboBox { background: #F9FAFB; border: 1.5px solid #E5E7EB; border-radius: 10px;
                     padding: 4px 14px; color: #1f2937; font-family: 'Segoe UI'; font-size: 11pt; }
         QComboBox:focus { border: 1.5px solid #378ADD; background: white; }
@@ -3551,7 +3587,10 @@ void QuaisWindow::onEditQuai(int row)
     cancelBtn->setFixedHeight(45);
     cancelBtn->setFont(QFont("Segoe UI", 11, QFont::Medium));
     cancelBtn->setCursor(Qt::PointingHandCursor);
-    cancelBtn->setStyleSheet(R"(
+    cancelBtn->setStyleSheet(qApp->property("isDarkMode").toBool() ? R"(
+        QPushButton { background: #4A5568; color: #E2E8F0; border-radius: 12px; font-weight: bold; }
+        QPushButton:hover { background: #374151; }
+    )" : R"(
         QPushButton { background: #F3F4F6; color: #374151; border-radius: 12px; font-weight: bold; }
         QPushButton:hover { background: #E5E7EB; }
     )");
@@ -3561,7 +3600,10 @@ void QuaisWindow::onEditQuai(int row)
     saveBtn->setFixedHeight(45);
     saveBtn->setFont(QFont("Segoe UI", 11, QFont::Bold));
     saveBtn->setCursor(Qt::PointingHandCursor);
-    saveBtn->setStyleSheet(R"(
+    saveBtn->setStyleSheet(qApp->property("isDarkMode").toBool() ? R"(
+        QPushButton { background: #3B82F6; color: white; border-radius: 12px; font-weight: bold; }
+        QPushButton:hover { background: #1D4ED8; }
+    )" : R"(
         QPushButton { background: #2563EB; color: white; border-radius: 12px; font-weight: bold; }
         QPushButton:hover { background: #1D4ED8; }
     )");
