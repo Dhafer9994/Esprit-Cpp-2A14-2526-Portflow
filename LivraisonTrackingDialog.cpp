@@ -1,5 +1,6 @@
 #include "LivraisonTrackingDialog.h"
 #include "mainwindow.h"
+#include "configmanager.h"
 #include <QApplication>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -7,6 +8,7 @@
 #include <QUrlQuery>
 #include <QBuffer>
 #include <QDateTime>
+#include <QMessageBox>
 #include <cmath>
 
 // MapWidget Methods
@@ -192,6 +194,23 @@ void LivraisonTrackingDialog::finalizePan()
 
 void LivraisonTrackingDialog::geocodeAddress(const QString& address)
 {
+    if (!ConfigManager::instance().isLoaded()) {
+        QMessageBox::critical(this, m_isEnglish ? "Configuration Error" : "Erreur de Configuration",
+                              m_isEnglish ? "The config.json file is missing or invalid:\n" + ConfigManager::instance().getErrorString()
+                                          : "Le fichier config.json est manquant ou invalide :\n" + ConfigManager::instance().getErrorString());
+        m_statusLabel->setText(m_isEnglish ? "❌ Configuration Error" : "❌ Erreur Configuration");
+        return;
+    }
+
+    QString orsKey = ConfigManager::instance().getValue("ORS_API_KEY");
+    if (orsKey.isEmpty()) {
+        QMessageBox::critical(this, m_isEnglish ? "Configuration Error" : "Erreur de Configuration",
+                              m_isEnglish ? "The 'ORS_API_KEY' key is missing from config.json."
+                                          : "La clé 'ORS_API_KEY' est manquante dans config.json.");
+        m_statusLabel->setText(m_isEnglish ? "❌ Configuration Error" : "❌ Erreur Configuration");
+        return;
+    }
+
     QUrl url("https://nominatim.openstreetmap.org/search");
     QUrlQuery query;
     query.addQueryItem("q", address);

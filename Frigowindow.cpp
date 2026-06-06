@@ -3,6 +3,7 @@
 
 #include "frigowindow.h"
 #include "addfrigodialog.h"
+#include "configmanager.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <QHeaderView>
@@ -1145,14 +1146,21 @@ void FrigoWindow::onSendSMS()
 
     // ================= CONFIG API =================
 
-    QString token =
-        "33q4B0cRDNcFxawMP5phTJe4fZJ=YmBdD9I8liBHLux3!DCHKgMt81DDxD8c0TbLhxVK65cy5cXgQpFRfefl6nFTDQjFqojllRFwui55";
+    if (!ConfigManager::instance().isLoaded()) {
+        QMessageBox::critical(this, "Erreur de Configuration",
+                              "Le fichier config.json est manquant ou invalide :\n" + ConfigManager::instance().getErrorString());
+        return;
+    }
 
-    QString sender =
-        "TunSMS Test"; // ⚠️ remplacer par sender MyStudents
+    QString token = ConfigManager::instance().getValue("TUN_SMS_TOKEN");
+    QString sender = ConfigManager::instance().getValue("TUN_SMS_SENDER", "TunSMS Test");
+    QString apiUrl = ConfigManager::instance().getValue("TUN_SMS_URL", "https://mystudents.tunisiesms.tn/api/sms");
 
-    QString apiUrl =
-        "https://mystudents.tunisiesms.tn/api/sms";
+    if (token.isEmpty()) {
+        QMessageBox::critical(this, "Erreur de Configuration",
+                              "Le jeton d'accès 'TUN_SMS_TOKEN' est manquant dans config.json.");
+        return;
+    }
 
 
     // ================= ENVOI JSON =================

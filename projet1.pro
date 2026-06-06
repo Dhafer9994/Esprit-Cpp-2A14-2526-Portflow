@@ -8,6 +8,7 @@ TARGET = PortFlow
 # Source files
 SOURCES += main.cpp \
            aiintegration.cpp \
+           configmanager.cpp \
            mainwindow.cpp \
            arduino.cpp \
            AddLivraisonDialog.cpp \
@@ -49,6 +50,7 @@ SOURCES += main.cpp \
 # Header files
 HEADERS += mainwindow.h \
            aiintegration.h \
+           configmanager.h \
            arduino.h \
            AddLivraisonDialog.h \
            BateauStatisticsDialog.h \

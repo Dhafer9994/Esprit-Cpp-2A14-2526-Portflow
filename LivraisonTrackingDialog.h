@@ -108,7 +108,6 @@ private:
     bool m_isEnglish = false;
     
     // Constants
-    const QString ORS_API_KEY = "5b3ce3597851110001cf6248d3e9142f9e424268a05fbbd72565432";
     const double PORT_LON = 11.0622;
     const double PORT_LAT = 35.5042;
 };

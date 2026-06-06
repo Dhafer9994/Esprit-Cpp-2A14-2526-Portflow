@@ -1,4 +1,5 @@
 #include "aiintegration.h"
+#include "configmanager.h"
 
 #include <QtMath>
 #include <QByteArray>
@@ -19,6 +20,10 @@ namespace {
 
 QString envOrEmpty(const char* name)
 {
+    QString configVal = ConfigManager::instance().getValue(QString::fromLatin1(name));
+    if (!configVal.isEmpty())
+        return configVal;
+
     const QByteArray value = qgetenv(name);
     return QString::fromUtf8(value).trimmed();
 }

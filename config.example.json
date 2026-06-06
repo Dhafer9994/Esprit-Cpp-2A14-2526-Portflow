@@ -1,0 +1,10 @@
+{
+  "ORS_API_KEY": "5b3ce3597851110001cf6248d3e9142f9e424268a05fbbd72565432",
+  "TUN_SMS_TOKEN": "33q4B0cRDNcFxawMP5phTJe4fZJ=YmBdD9I8liBHLux3!DCHKgMt81DDxD8c0TbLhxVK65cy5cXgQpFRfefl6nFTDQjFqojllRFwui55",
+  "TUN_SMS_SENDER": "TunSMS Test",
+  "TUN_SMS_URL": "https://mystudents.tunisiesms.tn/api/sms",
+  "PORTFLOW_AI_TOKEN": "votre_token_bearer_ici",
+  "PORTFLOW_AI_ASSIGNMENT_URL": "http://api.example.com/dock-assignment",
+  "PORTFLOW_AI_ANALYSIS_URL": "http://api.example.com/dock-analysis",
+  "PORTFLOW_AI_EMPLOYEE_URL": "http://api.example.com/employee-report"
+}

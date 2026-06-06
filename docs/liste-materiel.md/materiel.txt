@@ -1,0 +1,8 @@
+- Arduino Uno
+- Capteur DHT11
+- OLED SSD1306
+- RFID RC522
+- Buzzer
+- LEDs
+- Câbles Dupont
+- afficheur OLEDModule Capteur de Vibrations SW-420

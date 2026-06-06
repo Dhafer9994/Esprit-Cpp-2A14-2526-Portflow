@@ -1,50 +1,68 @@
-# ========================
 # Build folders
-# ========================
 build/
-cmake-build-*/
+build-*/
+cmake-build-debug/
+cmake-build-release/
 out/
 
-# ========================
-# CMake generated files
-# ========================
+# CMake
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
-CTestTestfile.cmake
-compile_commands.json
 Makefile
-*.cmake
+compile_commands.json
 
-# ========================
 # Qt Creator
-# ========================
-*.user
-*.autosave
+*.pro.user
+*.pro.user.*
 *.creator
 *.creator.user
-*.files
-*.includes
-.qtcreator/
+*.creator.user.*
 
-# ========================
-# Compiled files
-# ========================
-*.exe
-*.dll
-*.obj
+# Qt generated files
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+
+# Object files
 *.o
+*.obj
+*.so
 *.a
-*.lib
+*.dll
+*.exe
+*.out
 
-# ========================
+# Debug / Release
+debug/
+release/
+
 # Logs
-# ========================
 *.log
 
-# ========================
-# Ninja
-# ========================
-.ninja_deps
-.ninja_log
-build.ninja
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+config.json
+
+# Temporary
+*.tmp
+*.cache
+# Databases (PortFlow specific)
+*.db
+
+# Python cache (Face ID module)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
