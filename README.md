@@ -7,7 +7,7 @@
 *Application de bureau C++/Qt intégrant IoT, IA et optimisation opérationnelle*
 
 ![C++](https://img.shields.io/badge/C++-17-00599C?style=flat-square&logo=cplusplus&logoColor=white)
-![Qt](https://img.shields.io/badge/Qt-6.8-41CD52?style=flat-square&logo=qt&logoColor=white)
+![Qt](https://img.shields.io/badge/Qt-6.7.3-41CD52?style=flat-square&logo=qt&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Oracle](https://img.shields.io/badge/Oracle-Database-F80000?style=flat-square&logo=oracle&logoColor=white)
 ![Arduino](https://img.shields.io/badge/Arduino-IoT-00979D?style=flat-square&logo=arduino&logoColor=white)
